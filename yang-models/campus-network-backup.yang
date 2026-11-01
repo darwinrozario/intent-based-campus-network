@@ -1,0 +1,70 @@
+
+module campus-network {
+
+    yang-version 1.1;
+
+    namespace "urn:campus:network";
+    prefix campus;
+
+    organization
+        "Campus Network Management System";
+
+    description
+        "YANG model for Intent-Based Campus LAN Management";
+
+    revision 2026-10-31 {
+        description
+            "Initial campus network policy model";
+    }
+
+    container campus-network {
+
+        description
+            "Campus network configuration";
+
+        list policies {
+
+            key "name";
+
+            description
+                "Network access control policies";
+
+            leaf name {
+                type string;
+                description "Policy name";
+            }
+
+            leaf action {
+                type enumeration {
+                    enum allow;
+                    enum block;
+                }
+                mandatory true;
+            }
+
+            leaf source {
+                type enumeration {
+                    enum student;
+                    enum faculty;
+                    enum administration;
+                }
+                mandatory true;
+            }
+
+            leaf destination {
+                type enumeration {
+                    enum student;
+                    enum faculty;
+                    enum administration;
+                }
+                mandatory true;
+            }
+
+            leaf enabled {
+                type boolean;
+                default true;
+            }
+        }
+    }
+}
+

@@ -1,0 +1,38 @@
+# Environment variables and secrets
+.env
+.env.*
+!.env.example
+backend/.env
+frontend/.env
+frontend/.env.*
+
+# Python virtual environments
+venv/
+backend/venv/
+.venv/
+
+# Python cache
+__pycache__/
+*.py[cod]
+
+# Node modules and build files
+frontend/node_modules/
+frontend/dist/
+
+# Logs
+*.log
+npm-debug.log*
+
+# IDE and OS files
+.vscode/
+.idea/
+.DS_Store
+
+# Test and coverage files
+.coverage
+.pytest_cache/
+
+# SQLite database
+*.db
+*.sqlite
+*.sqlite3

@@ -1,0 +1,114 @@
+module campus-network {
+
+    yang-version 1.1;
+
+    namespace "urn:campus:network";
+    prefix campus;
+
+    organization
+        "Campus Network Management System";
+
+    description
+        "YANG model for Intent-Based Campus Network Management";
+
+    revision 2026-11-01 {
+        description
+            "Added department, VLAN, network member and department-level policy management";
+    }
+
+    container campus-network {
+
+        description
+            "Campus network configuration";
+
+        list departments {
+
+            key "name";
+
+            description
+                "Campus departments and their network configuration";
+
+            leaf name {
+                type string;
+                description "Department identifier";
+            }
+
+            leaf vlan-id {
+                type uint16 {
+                    range "1..4094";
+                }
+                mandatory true;
+            }
+
+            leaf subnet {
+                type string;
+                mandatory true;
+            }
+
+            list members {
+
+                key "name";
+
+                description
+                    "Devices belonging to the department";
+
+                leaf name {
+                    type string;
+                }
+
+                leaf ip-address {
+                    type string;
+                    mandatory true;
+                }
+
+                leaf switch-port {
+                    type uint16 {
+                        range "1..65535";
+                    }
+                    mandatory true;
+                }
+            }
+        }
+
+        list policies {
+
+            key "name";
+
+            description
+                "Department-level network access control policies";
+
+            leaf name {
+                type string;
+            }
+
+            leaf action {
+                type enumeration {
+                    enum allow;
+                    enum block;
+                }
+                mandatory true;
+            }
+
+            leaf source {
+                type leafref {
+                    path "../../departments/name";
+                    require-instance false;
+                }
+                mandatory true;
+            }
+
+            leaf destination {
+                type leafref {
+                    path "../../departments/name";
+                    require-instance false;
+                }
+                mandatory true;
+            }
+
+            leaf enabled {
+                type boolean;
+                default true;
+            }
+        }
+    }
+}

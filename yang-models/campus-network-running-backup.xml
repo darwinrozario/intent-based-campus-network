@@ -1,0 +1,9 @@
+<campus-network xmlns="urn:campus:network">
+  <policies>
+    <name>block-student-admin</name>
+    <action>allow</action>
+    <source>student</source>
+    <destination>administration</destination>
+    <enabled>true</enabled>
+  </policies>
+</campus-network>
